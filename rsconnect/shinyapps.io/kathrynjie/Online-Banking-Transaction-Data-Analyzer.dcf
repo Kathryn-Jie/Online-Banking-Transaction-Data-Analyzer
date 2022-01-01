@@ -1,0 +1,14 @@
+name: Online-Banking-Transaction-Data-Analyzer
+title: Online-Banking-Transaction-Data-Analyzer
+username:
+account: kathrynjie
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 5384486
+bundleId: 5424922
+url: https://kathrynjie.shinyapps.io/Online-Banking-Transaction-Data-Analyzer/
+when: 1641049364.52785
+lastSyncTime: 1641049364.52785
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: online_banking_transaction_dataset.csv|online_banking_transaction_dataset.xlsx|README.md
