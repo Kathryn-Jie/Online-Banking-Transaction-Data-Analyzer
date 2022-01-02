@@ -5,10 +5,10 @@ account: kathrynjie
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 5384486
-bundleId: 5424922
+bundleId: 5426398
 url: https://kathrynjie.shinyapps.io/Online-Banking-Transaction-Data-Analyzer/
-when: 1641049364.52785
-lastSyncTime: 1641049364.52785
+when: 1641113631.50308
+lastSyncTime: 1641113631.50308
 asMultiple: FALSE
 asStatic: FALSE
 ignoredFiles: online_banking_transaction_dataset.csv|online_banking_transaction_dataset.xlsx|README.md
