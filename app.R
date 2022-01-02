@@ -16,13 +16,16 @@ server = function(input, output, sesion) {
     
     sidebarMenu(id="tabs", 
                 menuItem("Overview", tabName = "Overview", icon = icon("search-dollar")),
-                menuItem("Dashboard", tabName = "Dashboard", icon = icon("chart-line")))})
+                menuItem("Dashboard", tabName = "Dashboard", icon = icon("chart-line")),
+                menuItem("Alert", tabName = "Alert", icon = icon("exclamation-circle")))})
   
   output$body <- renderUI({ 
     tabItems(tabItem(tabName = "Overview",
                      uiOutput("overview_tab")),
              tabItem(tabName = "Dashboard",
-                     uiOutput("dashboard_tab")))})
+                     uiOutput("dashboard_tab")),
+             tabItem(tabName = "Alert",
+                     uiOutput("alert_tab")))})
   
   ###Overview tab###
   output$overview_tab <- renderUI({
@@ -161,10 +164,11 @@ server = function(input, output, sesion) {
                      header = input$header,
                      sep = input$sep)
     
-    plot_ly(data, x=~time, type="histogram")
+    data %>% count(time_range) %>% 
+      mutate(time_range = fct_reorder(time_range, n, .desc = TRUE)) %>%
+      plot_ly(x = ~time_range, y = ~n) %>% add_bars()
     
   })
-  
   
   output$typ <- renderPlotly({
     
@@ -187,6 +191,24 @@ server = function(input, output, sesion) {
     
     plot_ly(data, x=~amount, type="histogram", xbins = list(start = 0, size = 500))
   
+  })
+  
+  ###Alert tab###
+  output$alert_tab <- renderUI({
+    
+    data <- read.csv(input$file1$datapath,
+                     header = input$header,
+                     sep = input$sep)
+    
+    n <- data %>% nrow()
+    minday <- data %>% summarise(minday = min(weekday))
+    mintime <- data %>% summarise(mintime = min(time_range))
+    
+    fluidRow(
+      infoBox("Total Transactions", n, icon = icon("credit-card")),
+      infoBox("Next system update day", minday, icon = icon("calendar-day")),
+      infoBox("Next system update time", mintime, icon = icon("clock"))
+    )
   })
 
 }  
